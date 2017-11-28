@@ -3,6 +3,7 @@
 namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
+use Moloquent\Query\Builder;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -23,6 +24,9 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        //
+        // Workaround for moloquent missing method in Passport
+        Builder::macro('getName', function() {
+            return 'mongodb';
+        });
     }
 }
